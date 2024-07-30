@@ -3,8 +3,8 @@
 # 1.给与权限，运行： chmod +x ./check.sh
 # 2.运行： ./check.sh
 # 运行实例
-read -p "请输入开始节点数字: " num_start
-read -p "请输入结束节点数字: " num_end
+num_start=1
+num_end=80
  
 network_height=$(curl -s -X 'GET' 'https://allora-rpc.testnet-1.testnet.allora.network/abci_info' -H 'accept: application/json' | jq -r .result.response.last_block_height)
 echo ${network_height}
@@ -39,11 +39,6 @@ run_instance() {
           \"timeout\": 10  
       }  
   }"  | jq
-      echo "检查 Updater 节点: curl http://localhost:$((8000 + port_offset))/update"
-      curl http://localhost:$((8000 + port_offset))/update
-      echo ""
-      echo "检查 Inference 节点: curl http://localhost:$((8000 + port_offset))/inference/ETH"
-      curl http://localhost:$((8000 + port_offset))/inference/ETH
       echo ""
 }
 
